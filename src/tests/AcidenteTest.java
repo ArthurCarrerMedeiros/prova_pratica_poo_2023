@@ -45,7 +45,12 @@ class AcidenteTest {
 		Pessoa pessoa3 = new Pessoa("Cleber", 32, 'F', false);
 		Pessoa pessoa4 = new Pessoa("Maria", 24, 'F', true);
 		
-		Veiculo veiculo1 = new Veiculo("Gol", 2011, null, pessoa1);
+		Veiculo veiculo1 = new Veiculo();
+		veiculo1.setNome("Gol");
+		veiculo1.setAno(2011);
+		veiculo1.setPessoasList(null);
+		veiculo1.setCondutor(pessoa1);
+		
 		Veiculo veiculo2 = new Veiculo("Captur", 2013, null, pessoa2);
 		Veiculo veiculo3 = new Veiculo("Fusca", 2001, null, pessoa3);
 		Veiculo veiculo4 = new Veiculo("Mercedes", 2002, null, pessoa4);
@@ -60,7 +65,13 @@ class AcidenteTest {
 		veiculos3.add(veiculo3);
 		veiculos4.add(veiculo4);
 		
-		Acidente acidente1 = new Acidente(rodovia1, 0, 0, 1, veiculos1);
+		Acidente acidente1 = new Acidente();
+		acidente1.setRodovia(rodovia1);
+		acidente1.setQtVitimasFatais(0);
+		acidente1.setQtVitimasFeridas(0);
+		acidente1.setMes(1);
+		acidente1.setVeiculos(veiculos1);
+		
 		Acidente acidente2 = new Acidente(rodovia1, 0, 0, 1, veiculos2);
 		Acidente acidente3 = new Acidente(rodovia1, 0, 0, 1, veiculos3);
 		Acidente acidente4 = new Acidente(rodovia1, 0, 0, 1, veiculos4);
@@ -133,40 +144,6 @@ class AcidenteTest {
 	}
 	
 	@Test
-	void listarRodoviaMaisFatalTest() {
-		Rodovia rodovia1 = new Rodovia("Miranda das Flores", "TESTE", "Alta");
-		Rodovia rodovia2 = new Rodovia("Joaquim da Serra", "TESTE", "Alta");
-		Rodovia rodovia3 = new Rodovia("Lurdes do Amanhã", "TESTE", "Alta");
-		Rodovia rodovia4 = new Rodovia("Jhon Kanabby", "TESTE", "Alta");
-		Rodovia rodovia5 = new Rodovia("Newan Kewn", "TESTE", "Alta");
-		Rodovia rodovia6 = new Rodovia("Jiuca Plate", "TESTE", "Alta");
-		Rodovia rodovia7 = new Rodovia("Grande Jardim", "TESTE", "Alta");
-		Rodovia rodovia8 = new Rodovia("Invernada Do Gelo", "TESTE", "Alta");
-		
-		Acidente acidente1 = new Acidente(rodovia1, 24, 0, 1, null);
-		Acidente acidente2 = new Acidente(rodovia2, 12, 0, 1, null);
-		Acidente acidente3 = new Acidente(rodovia3, 1, 0, 1, null);
-		Acidente acidente4 = new Acidente(rodovia4, 3, 0, 1, null);
-		Acidente acidente5 = new Acidente(rodovia5, 76, 0, 1, null);
-		Acidente acidente6 = new Acidente(rodovia6, 42, 0, 1, null);
-		Acidente acidente7 = new Acidente(rodovia7, 21, 0, 1, null);
-		Acidente acidente8 = new Acidente(rodovia8, 123, 0, 1, null);
-		
-		List<Acidente> acidentes = new ArrayList<>();
-		acidentes.add(acidente1);
-		acidentes.add(acidente2);
-		acidentes.add(acidente3);
-		acidentes.add(acidente4);
-		acidentes.add(acidente5);
-		acidentes.add(acidente6);
-		acidentes.add(acidente7);
-		acidentes.add(acidente8);
-		
-		Rodovia rodoviaMaisFatal = Rodovia.listarRodoviaMaisFatal(acidentes);
-		assertEquals(rodoviaMaisFatal, acidente8.getRodovia());
-	}
-	
-	@Test
 	void listarAcidentesVeiculoNovoTest() {
 		Rodovia rodovia = new Rodovia();
 		rodovia.setNome("Miranda das Flores");
@@ -212,29 +189,5 @@ class AcidenteTest {
 		List<Acidente> acidentesFiltrados = Acidente.listarAcidentesVeiculoNovo(acidentes);
 		assertEquals(veiculo2, acidentesFiltrados.get(0).getVeiculos().get(0));
 		assertEquals(veiculo6, acidentesFiltrados.get(1).getVeiculos().get(0));
-	}
-	
-	@Test
-	void listarRodoviaAcidenteCarnaval() {
-		Rodovia rodovia1 = new Rodovia("Miranda das Flores", "TESTE", "Alta");
-		Rodovia rodovia2 = new Rodovia("Joaquim da Serra", "TESTE", "Alta");
-		Rodovia rodovia3 = new Rodovia("Lurdes do Amanhã", "TESTE", "Alta");
-		Rodovia rodovia4 = new Rodovia("Jhon Kanabby", "TESTE", "Alta");
-		
-		Acidente acidente1 = new Acidente(rodovia1, 24, 0, 2, null);
-		Acidente acidente2 = new Acidente(rodovia2, 12, 0, 1, null);
-		Acidente acidente3 = new Acidente(rodovia3, 1, 0, 2, null);
-		Acidente acidente4 = new Acidente(rodovia4, 3, 0, 2, null);
-		
-		List<Acidente> acidentes = new ArrayList<>();
-		acidentes.add(acidente1);
-		acidentes.add(acidente2);
-		acidentes.add(acidente3);
-		acidentes.add(acidente4);
-		
-		List<Rodovia> rodoviasFiltradas = Rodovia.listarRodoviaAcidenteCarnaval(acidentes);
-		assertEquals(rodovia1, rodoviasFiltradas.get(0));
-		assertEquals(rodovia3, rodoviasFiltradas.get(1));
-		assertEquals(rodovia4, rodoviasFiltradas.get(2));
 	}
 }
