@@ -2,6 +2,7 @@ package prova;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 
@@ -16,7 +17,6 @@ public class Acidente {
 	}
 
 	public Acidente(Rodovia rodovia, int qtVitimasFatais, int qtVitimasFeridas, int mes, List<Veiculo> veiculos) {
-		super();
 		this.rodovia = rodovia;
 		this.qtVitimasFatais = qtVitimasFatais;
 		this.qtVitimasFeridas = qtVitimasFeridas;
@@ -43,7 +43,7 @@ public class Acidente {
 		List<Acidente> acidentesFiltrados = new ArrayList<>();
 		
 		for(Acidente acidente: acidentes) {
-			if(acidente.getRodovia().getPericulosidade().equals(periculosidade)) {
+			if(acidente.getRodovia().getPericulosidade().equals(periculosidade.toUpperCase())) {
 				acidentesFiltrados.add(acidente);
 			}
 		}
@@ -89,18 +89,7 @@ public class Acidente {
 		return acidentesFiltrados;
 	}
 	
-	public static Acidente listarMaisAcidentesFatais(List<Acidente> acidentes) {
-		Acidente acidenteMaisFatal = new Acidente();
-		
-		for(Acidente acidente: acidentes) {
-			if(acidente.getQtVitimasFatais() > acidenteMaisFatal.getQtVitimasFatais()) {
-				acidenteMaisFatal = acidente;
-			}
-		}
-		return acidenteMaisFatal;
-	}
-	
-	public static List<Acidente> listarAcidentesCarroNovo(List<Acidente> acidentes) {
+	public static List<Acidente> listarAcidentesVeiculoNovo(List<Acidente> acidentes) {
 		List<Acidente> acidentesFiltrados = new ArrayList<>();
 		
 		for(Acidente acidente: acidentes) {
@@ -111,17 +100,6 @@ public class Acidente {
 			}
 		}
 		return acidentesFiltrados;
-	}
-	
-	public static List<Rodovia> listarAcidentesCarnaval(List<Acidente> acidentes) {
-		List<Rodovia> rodoviasFiltradas = new ArrayList<>();
-		
-		for(Acidente acidente: acidentes) {
-			if(acidente.getMes() == 2) {
-				rodoviasFiltradas.add(acidente.getRodovia());
-			}
-		}
-		return rodoviasFiltradas;
 	}
 	
 	public Rodovia getRodovia() {

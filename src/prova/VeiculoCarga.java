@@ -1,12 +1,15 @@
 package prova;
 
+import java.util.List;
+
 public class VeiculoCarga extends Veiculo {
 	private double qtCarga;
-
+	
 	public VeiculoCarga() {
 	}
-	
-	public VeiculoCarga(double qtCarga) {
+
+	public VeiculoCarga(String nome, int ano, List<Pessoa> pessoasList, Pessoa condutor, double qtCarga) {
+		super(nome, ano, pessoasList, condutor);
 		this.qtCarga = qtCarga;
 	}
 

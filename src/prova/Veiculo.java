@@ -6,10 +6,10 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class Veiculo {
-	private String nome;
-	private int ano;
-	private List<Pessoa> pessoasList;
-	private Pessoa condutor;
+	protected String nome;
+	protected int ano;
+	protected List<Pessoa> pessoasList;
+	protected Pessoa condutor;
 	
 	public Veiculo() {
 	}
@@ -32,7 +32,16 @@ public class Veiculo {
 		while(Integer.parseInt(JOptionPane.showInputDialog("Deseja cadastrar uma pessoa que estava no veículo?\n1-Sim, 2-Não")) == 1) {
 			pessoasList.add(Pessoa.cadastrar());
 		}
-		return new Veiculo(nome, ano, pessoasList, condutor);
+		
+		int escolha = Integer.parseInt(JOptionPane.showInputDialog("O que é o seu veículo?\n1-Veiculo normal, 2-Veículo de carga, 3-Bicicleta"));
+		if(escolha == 1) {
+			return new Veiculo(nome, ano, pessoasList, condutor);
+		} else if(escolha == 2) {
+			double carga = Double.parseDouble(JOptionPane.showInputDialog("Digite a carga do veículo em Kg: "));
+			return new VeiculoCarga(nome, ano, pessoasList, condutor, carga);
+		} else {
+			return new Bicicleta(nome, ano, pessoasList, condutor);
+		}
 	}
 
 	public String getNome() {
